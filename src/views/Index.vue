@@ -43,7 +43,9 @@
 
         <!-- Request new swap -->
         <hr>
-        <p class="font-light mt-2 mb-3">Please do not use the same address for more than one swap! If you wish to carry out another swap, please generate a new swap request using the button below.</p>
+        <p class="font-light mt-2 mb-3">
+          <b>Please do not use the same address for more than one swap!</b>
+          If you wish to carry out another swap, please generate a new swap request using the button below.</p>
         <button
           class="block w-full bg-orange-500 hover:bg-orange-400 p-4 rounded text-yellow-900 transition duration-300"
           @click="newSwapRequest()">Get a new swap request
