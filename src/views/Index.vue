@@ -7,7 +7,7 @@
 
       <!-- Step 0: Connect to Metamask -->
       <div v-if="formStep === 0">
-        <h1 class="text-3xl font-light mb-4 text-center">Feirm Blockchain Bridge 🌉</h1>
+        <h1 class="text-3xl font-light mb-4 text-center">Feirm Blockchain Bridge 🌉 (TESTNET)</h1>
 
         <p class="font-light mb-2">
           Welcome to the Feirm Blockchain Bridge. This web application will allow you to migrate your native blockchain XFE coins into the brand-new XFE token recently launched on the Binance Smart Chain.
