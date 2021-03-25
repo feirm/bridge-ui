@@ -94,8 +94,7 @@ export default defineComponent({
         // To be compatible with Feirm PWA, append Feirm infront
         this.addressQr = await qrcode.toDataURL("feirm:" + this.request.deposit_address)
       } catch (e) {
-        // Handle this later
-        alert(e);
+        return this.$toast.error(e.response.data.error);
       }
       
       // Proceed to next step
@@ -112,8 +111,7 @@ export default defineComponent({
         // To be compatible with Feirm PWA, append Feirm infront
         this.addressQr = await qrcode.toDataURL("feirm:" + this.request.deposit_address)
       } catch (e) {
-        // Handle this later
-        alert(e);
+        return this.$toast.error(e.response.data.error)
       }
     }
   }
