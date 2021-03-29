@@ -51,6 +51,14 @@
           @click="newSwapRequest()">Get a new swap request
         </button>
       </div>
+
+      <!-- Step 2: Bridge disabled -->
+      <div v-if="formStep === 2">
+        <h1 class="text-3xl font-light mb-4 text-center">Feirm Blockchain Bridge 🌉</h1>
+        <p class="font-light mb-2">
+          Sorry, the blockchain bridge isn't open yet! Please check back on <b>Friday 2nd April 2021</b>, as that is the date it will be opened.
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -70,7 +78,7 @@ export default defineComponent({
       address: "",
       addressQr: "",
       request: "" as any,
-      formStep: 0
+      formStep: 2
     }
   },
   methods: {
