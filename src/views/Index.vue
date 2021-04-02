@@ -95,7 +95,7 @@ export default defineComponent({
       addressQr: "",
       request: "" as any,
       advanced: false,
-      formStep: 2
+      formStep: 0
     }
   },
   methods: {
