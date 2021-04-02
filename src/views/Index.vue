@@ -7,19 +7,35 @@
 
       <!-- Step 0: Connect to Metamask -->
       <div v-if="formStep === 0">
-        <h1 class="text-3xl font-light mb-4 text-center">Feirm Blockchain Bridge 🌉 (TESTNET)</h1>
+        <h1 class="text-3xl font-light mb-4 text-center">Feirm Blockchain Bridge 🌉</h1>
 
-        <p class="font-light mb-2">
+        <p class="font-light mb-4">
           Welcome to the Feirm Blockchain Bridge. This web application will allow you to migrate your native blockchain XFE coins into the brand-new XFE token recently launched on the Binance Smart Chain.
         </p>
 
-        <p class="font-light mb-3">To ensure a smooth migration, please make sure you have the Metamask extension installed and configured for your browser.</p>
+        <p class="font-light mb-3" v-if="!advanced">To ensure a smooth migration, please make sure you have the Metamask extension installed and configured for your browser.</p>
+
+        <p class="font-light text-center mb-3" v-if="advanced"><b>⚠️ Warning! This is an advanced option! ⚠️</b></p>
+        <p class="font-light mb-3" v-if="advanced">Please enter your custom Binance Smart Chain address below. Feirm does not officially endorse this option, so use it at your own risk! Your XFE tokens could be at stake.</p>
 
         <!-- Connect to Metamask button -->
-        <button
-          class="block w-full bg-orange-500 hover:bg-orange-400 p-4 rounded text-yellow-900 transition duration-300"
+        <button v-if="!advanced"
+          class="block mb-2 w-full bg-orange-500 hover:bg-orange-400 p-4 rounded text-yellow-900 transition duration-300"
           @click="loadWeb3()">Connect to Metamask
         </button>
+
+        <!-- Advanced settings -->
+        <button class="block rounded w-full p-4 bg-gray-200 text-gray-900" @click="advanced = !advanced" v-if="!advanced">Advanced Options</button>
+
+        <!-- Custom address -->
+        <input v-if="advanced" class="w-full border-2 mb-3 border-gray-200 p-3 rounded outline-none focus:border-orange-500 transition duration-200" v-model="address" type="text" placeholder="Please enter your Binance Smart Chain address" />
+        <button v-if="advanced"
+          @click="submitCustomAddress"
+          class="block mb-2 w-full bg-orange-500 hover:bg-orange-400 p-4 rounded text-yellow-900 transition duration-300"
+          >Submit
+        </button>
+
+        <button class="block rounded w-full p-4 bg-red-400 text-red-900" v-if="advanced" @click="goBack">Go back!</button>
       </div>
 
       <!-- Step 1: Swap request details -->
@@ -78,6 +94,7 @@ export default defineComponent({
       address: "",
       addressQr: "",
       request: "" as any,
+      advanced: false,
       formStep: 2
     }
   },
@@ -107,6 +124,29 @@ export default defineComponent({
       
       // Proceed to next step
       this.formStep++;
+    },
+    async submitCustomAddress() {
+      // Create a swap request
+      try {
+        const res = await bridgeService.CreateRequest(this.address);
+        this.request = res.data;
+
+        // Generate QR code of deposit address
+        // To be compatible with Feirm PWA, append Feirm infront
+        this.addressQr = await qrcode.toDataURL("feirm:" + this.request.deposit_address)
+      } catch (e) {
+        return this.$toast.error(e.response.data.error);
+      }
+      
+      // Proceed to next step
+      this.formStep++;
+    },
+    goBack() {
+      // Clear address
+      this.address = "";
+
+      // Toggle advanced state
+      this.advanced = false;
     },
     async newSwapRequest() {
       // Create a swap request
