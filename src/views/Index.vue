@@ -72,7 +72,7 @@
       <div v-if="formStep === 2">
         <h1 class="text-3xl font-light mb-4 text-center">Feirm Blockchain Bridge 🌉</h1>
         <p class="font-light mb-2">
-          Sorry, the blockchain bridge isn't open yet! Please check back on <b>Friday 2nd April 2021</b>, as that is the date it will be opened.
+          Sorry, the blockchain bridge is in maintenance mode! Please check back later.
         </p>
       </div>
     </div>
@@ -95,7 +95,7 @@ export default defineComponent({
       addressQr: "",
       request: "" as any,
       advanced: false,
-      formStep: 0
+      formStep: 2
     }
   },
   methods: {
