@@ -9,6 +9,8 @@
       <div v-if="formStep === 0" class="space-y-4">
         <h1 class="text-3xl font-light text-center">Feirm Blockchain Bridge 🌉</h1>
 
+        <h1 class="text-3xl text-center text-red-500">TESTNET ONLY!</h1>
+
         <p class="font-light">
           Welcome to the Feirm Blockchain Bridge. This web application will allow you to migrate your native blockchain XFE coins into the brand-new XFE token recently launched on the Binance Smart Chain.
         </p>
@@ -116,7 +118,7 @@ export default defineComponent({
 
       response: "",
       submitted: false,
-      formStep: 10
+      formStep: 0
     }
   },
   methods: {
