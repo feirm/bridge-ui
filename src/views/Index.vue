@@ -116,7 +116,7 @@ export default defineComponent({
 
       response: "",
       submitted: false,
-      formStep: 0
+      formStep: 10
     }
   },
   methods: {
